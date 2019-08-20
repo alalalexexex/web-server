@@ -1,6 +1,8 @@
 const express = require('express'); 
 const path = require('path'); 
 const hbs = require('hbs'); 
+const {geocode} = require('../utils/geocode'); 
+const {forecast} = require('../utils/forecast')
 
 // remember that nodejs projects are wrapped in a function
 // right now the hbs files have to be in the root of the project, and have to be stored in the directory called 'views'
@@ -46,16 +48,39 @@ app.get('/help', (req, res) => {
 
 app.get('/weather', (req, res) => {
     // send the json object to client
-    res.send({
-        location: 'Richmond', 
-        forecast: 'The weather looking mad nice'
-    }); 
+    if(!req.query.address){
+        return res.send({
+            error: 'No address Provided.'
+        }); 
+    }
+
+    // first geocode the query address, then get the forecast for that address.
+    // destructuring object that's undefined needs a default parameter
+    // NOTE That if there is not an object provided in the parameter, then set to empty object, and then can make a parameter default value
+    geocode(req.query.address, (err, {latitude, longitude, location} = {}) => {
+        // send the error that was sent back by the callback 
+        if(err) return res.send({err}); 
+        forecast(latitude, longitude, (err, weatherRes) => {
+            // send the error that was sent back by the callback 
+            if(err) return res.send({err}); 
+            res.send({
+                address: req.query.address, 
+                location, 
+                forecast: weatherRes
+            }); 
+        })
+    })
 }); 
 
 app.get('/products', (req, res) => {
+    if(!req.query.search){
+        return res.send({
+            error: 'Missing search query'
+        }); 
+    }
     res.send({
         products: [] 
-    })
+    }); 
 })
 
 // matches anything after /help/* and is more specific 
