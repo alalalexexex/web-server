@@ -1,23 +1,22 @@
 // client 
 console.log('client file is loaded!'); 
 
-
 const weatherForm = document.querySelector('form'); 
 const search = document.querySelector('input');
 const messageOne = document.querySelector('#messageOne'); 
 const messageTwo = document.querySelector('#messageTwo'); 
 
-search.addEventListener('keydown', (e) => {
-    const key = e.key; 
-    if(key == 'Backspace' || key == 'Delete'){
-        const newMsg = messageOne.textContent.substring(0, messageOne.textContent.length - 1);
-        messageOne.textContent = newMsg; 
-        return; 
-    }else if(key.length > 1){
-        return; 
-    }
-    messageOne.textContent += e.key; 
-}); 
+// search.addEventListener('keydown', (e) => {
+//     const key = e.key; 
+//     if(key == 'Backspace' || key == 'Delete'){
+//         const newMsg = messageOne.textContent.substring(0, messageOne.textContent.length - 1);
+//         messageOne.textContent = newMsg; 
+//         return; 
+//     }else if(key.length > 1){
+//         return; 
+//     }
+//     messageOne.textContent += e.key; 
+// }); 
 
 weatherForm.addEventListener('submit', (e) => {
     messageTwo.textContent = ""; 
