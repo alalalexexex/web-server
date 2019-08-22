@@ -44,7 +44,7 @@ app.get('/help', (req, res) => {
     res.render('help', {
         title: 'Need Help?',
         name: 'Alex Trainham', 
-        body: 'This is where you will get it :)'
+        body: 'Search by any identifying location name. The specific location found, and the corresponding forecast, will be displayed under the input box.'
     })
 })
 
