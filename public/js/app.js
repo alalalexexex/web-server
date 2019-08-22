@@ -29,7 +29,7 @@ weatherForm.addEventListener('submit', (e) => {
     if(!location) return console.log('Must provide an address'); 
 
     messageOne.textContent = 'Loading...'; 
-    fetch('http://localhost:8081/weather?address='+location).then((response) => {
+    fetch('/weather?address='+location).then((response) => {
         // it is resonse.error because we set up the body to send back an error property if something didn't work. 
         response.json().then((data) => {
             if(data.err){

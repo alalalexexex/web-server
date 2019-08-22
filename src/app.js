@@ -17,6 +17,8 @@ const viewsPath = path.join(__dirname, '../templates/views');
  * 'views' -> customize the directory name to templates
  */
 const app = express(); 
+const port = process.env.PORT || 8081;  
+
 app.set('view engine', 'hbs'); 
 app.set('views', viewsPath); 
 hbs.registerPartials(partialsPath); 
@@ -107,6 +109,6 @@ app.get('*', (req, res) => {
 // app.com/help
 // app.com/about
 
-app.listen(8081, () => {
+app.listen(port, () => {
     console.log('App is listening on 8081...'); 
 })
