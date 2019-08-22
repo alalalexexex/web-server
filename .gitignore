@@ -1,3 +1,3 @@
-# just don't track the node modules. Nothing else as of yet. 
+# don't track the node_modules
 
 node_modules/
